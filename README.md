@@ -1,4 +1,5 @@
 # MySchoolCompass
+(Add demo GIF here)
 
 ## Application Description
 Relationship Between Education Attainment and Financial Success
