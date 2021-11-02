@@ -1,0 +1,23 @@
+{
+  "name": "myschoolcompass",
+  "version": "1.0.0",
+  "description": "(Add demo GIF here)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aausek/MySchoolCompass.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aausek/MySchoolCompass/issues"
+  },
+  "homepage": "https://github.com/aausek/MySchoolCompass#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "oracledb": "^5.3.0"
+  }
+}
