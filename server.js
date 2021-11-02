@@ -114,7 +114,7 @@ async function run() {
     result = await connection.execute(sql, binds, options);
     console.log("Current date query results: ");
     console.log(result.rows[0]['CD']);
-    app.get('/', (req, res) => {
+    app.get('/home', (req, res) => {
       res.send(result.rows)
     });
 
