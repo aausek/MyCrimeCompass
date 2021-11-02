@@ -30,8 +30,8 @@ async function run() {
 
     connection = await oracledb.getConnection(
       {
-        user          : "",
-        password      : '',
+        user          : "aausek",
+        password      : "Ausek6493",
         connectString : "//oracle.cise.ufl.edu/orcl"
       }
     );
@@ -80,14 +80,16 @@ async function run() {
     result = await connection.executeMany(sql, binds, options);
 
     console.log("Number of rows inserted:", result.rowsAffected);
-
+    
     //
     // Query the data
     //
-
+    
     sql = `SELECT * FROM no_example`;
-
+    
     binds = {};
+    
+    
 
     // For a complete list of options see the documentation.
     options = {
@@ -107,11 +109,14 @@ async function run() {
     //
     // Show the date.  The value of ORA_SDTZ affects the output
     //
-
-    sql = `SELECT TO_CHAR(CURRENT_DATE, 'DD-Mon-YYYY HH24:MI') AS CD FROM DUAL`;
+    
+    //sql = `SELECT TO_CHAR(CURRENT_DATE, 'DD-Mon-YYYY HH24:MI') AS CD FROM DUAL`;
     result = await connection.execute(sql, binds, options);
     console.log("Current date query results: ");
     console.log(result.rows[0]['CD']);
+    app.get('/', (req, res) => {
+      res.send(result.rows)
+    });
 
   } catch (err) {
     console.error(err);
@@ -124,10 +129,17 @@ async function run() {
       }
     }
   }
+  
 }
 
 run();
 
+
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT}`)
 );
+
+process.on('SIGINT', function() {
+  console.log( "\nStopping server (Ctrl-C)" );
+  process.exit(0);
+});

@@ -1,7 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
+import Home from './components/Home';
+import { Router } from 'express';
+import { QueryClient, QueryClientProvider } from "react-query";
 
 function App() {
+  const queryClient = new QueryClient();
   return (
     <div className="App">
       <header className="App-header">
@@ -19,6 +23,7 @@ function App() {
         </a>
       </header>
     </div>
+    
   );
 }
 
