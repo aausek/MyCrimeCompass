@@ -43,20 +43,6 @@ class App extends Component {
 
             <Routing />
           </Router>
-          {/* <BrowserRouter>
-            <Routes>
-              <Route path="/home" element={<Home />} />
-              <Route path="/crime-by-time-of-day" element={<TimeOfDay />} />
-              <Route
-                path="/crime-by-average-duration"
-                element={<AverageDuration />}
-              />
-              <Route
-                path="/crime-by-precinct-highest-lowest"
-                element={<Precinct />}
-              />
-            </Routes>
-          </BrowserRouter> */}
         </div>
       </div>
     );
