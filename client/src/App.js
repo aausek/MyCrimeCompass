@@ -1,30 +1,66 @@
 import React, { Component } from "react";
-import { Route, NavLink, HashRouter } from "react-router-dom";
-import Home from "./components/Home/Home";
-import AverageDuration from "./components/AverageDuration/AverageDuration";
-import Precinct from "./components/Precinct/Precinct";
- 
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.css";
+import { Navbar, Nav, Container } from "react-bootstrap";
+import { Link, BrowserRouter as Router } from "react-router-dom";
+import Routing from "./routing/Routing";
+
 class App extends Component {
   render() {
     return (
-      <HashRouter>
-        <div>
-          <h1>Simple SPA</h1>
-          <ul className="header">
-            <li><a href="/home">Home</a></li>
-            <li><NavLink to="/crime-by-time-of-day">Crime By Time of Day</NavLink></li>
-            <li><NavLink to="/crime-by-average-duration">Crime By Average Duration</NavLink></li>
-            <li><NavLink to="/crime-by-precinct-highest-lowest">Highest and Lowest Incidence of Crime By Precinct</NavLink></li>
-          </ul>
-          <div className="content">
-            <Route path="/crime-by-time-of-day" component={Home}/>
-            <Route path="/crime-by-average-duration" component={AverageDuration}/>
-            <Route path="/crime-by-precinct-highest-lowest" component={Precinct}/>
-          </div>
+      <div>
+        <div className="App">
+          <Router>
+            <Navbar bg="dark" variant="dark">
+              <Container>
+                <Navbar.Brand href="/home">MyCrimeCompass</Navbar.Brand>
+
+                <Nav className="justify-content-end">
+                  <Nav.Item>
+                    <Nav.Link as={Link} to="/home">
+                      Home
+                    </Nav.Link>
+                  </Nav.Item>
+
+                  <Nav.Item>
+                    <Nav.Link as={Link} to="/crime-by-time-of-day">Time of Day</Nav.Link>
+                  </Nav.Item>
+
+                  <Nav.Item>
+                    <Nav.Link as={Link} to="/crime-by-average-duration">
+                      Average Duration
+                    </Nav.Link>
+                  </Nav.Item>
+
+                  <Nav.Item>
+                    <Nav.Link as={Link} to="/crime-by-precinct-highest-lowest">
+                      Crime By Precinct
+                    </Nav.Link>
+                  </Nav.Item>
+                </Nav>
+              </Container>
+            </Navbar>
+
+            <Routing />
+          </Router>
+          {/* <BrowserRouter>
+            <Routes>
+              <Route path="/home" element={<Home />} />
+              <Route path="/crime-by-time-of-day" element={<TimeOfDay />} />
+              <Route
+                path="/crime-by-average-duration"
+                element={<AverageDuration />}
+              />
+              <Route
+                path="/crime-by-precinct-highest-lowest"
+                element={<Precinct />}
+              />
+            </Routes>
+          </BrowserRouter> */}
         </div>
-      </HashRouter>
+      </div>
     );
   }
 }
- 
+
 export default App;

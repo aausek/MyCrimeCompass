@@ -5,7 +5,8 @@ class TimeOfDay extends Component {
   render() {
     return (
       <div>
-        <h2>Precinct Component</h2>
+        <br />
+        <h2>Time of Day Component</h2>
         <p>Cras facilisis urna ornare ex volutpat, et
         convallis erat elementum. Ut aliquam, ipsum vitae
         gravida suscipit, metus dui bibendum est, eget rhoncus nibh

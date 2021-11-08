@@ -30,8 +30,8 @@ async function run() {
 
     connection = await oracledb.getConnection(
       {
-        user          : "",
-        password      : "",
+        user          : "aausek",
+        password      : "Ausek6493",
         connectString : "//oracle.cise.ufl.edu/orcl"
       }
     );
@@ -114,8 +114,13 @@ async function run() {
     result = await connection.execute(sql, binds, options);
     console.log("Current date query results: ");
     console.log(result.rows[0]['CD']);
+    
     app.get('/api', (req, res) => {
       res.send(result.rows)
+    });
+
+    app.get('/home', (req, res) => {
+      res.send({ express: 'Hello From Express' });
     });
 
   } catch (err) {
@@ -133,6 +138,16 @@ async function run() {
 }
 
 run();
+
+if (process.env.NODE_ENV === 'production') {
+  // Serve any static files
+  app.use(express.static(path.join(__dirname, 'client/build')));
+    
+  // Handle React routing, return all requests to React app
+  app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  });
+}
 
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT}`)
