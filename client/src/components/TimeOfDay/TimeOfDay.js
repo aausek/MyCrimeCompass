@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
-// Query: Precinct with lowest/highest incidence of specific crime per month/year
-class Precinct extends Component {
+// Query: Time of day with higher incidence of specific crime per month/year
+class TimeOfDay extends Component {
   render() {
     return (
       <div>
@@ -19,4 +19,4 @@ class Precinct extends Component {
   }
 }
  
-export default Precinct;
+export default TimeOfDay;

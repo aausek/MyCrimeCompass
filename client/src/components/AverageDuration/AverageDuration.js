@@ -1,5 +1,6 @@
 import React, { Component } from "react";
- 
+
+// Query: Average duration of specific crime per month/year
 class AverageDuration extends Component {
   render() {
     return (
