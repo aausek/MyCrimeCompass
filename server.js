@@ -114,7 +114,7 @@ async function run() {
     result = await connection.execute(sql, binds, options);
     console.log("Current date query results: ");
     console.log(result.rows[0]['CD']);
-    app.get('/home', (req, res) => {
+    app.get('/api', (req, res) => {
       res.send(result.rows)
     });
 
@@ -133,7 +133,6 @@ async function run() {
 }
 
 run();
-
 
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT}`)

@@ -1,4 +1,4 @@
-# MySchoolCompass
+# CrimeCompass
 (Add demo GIF here)
 
 ## Application Description
