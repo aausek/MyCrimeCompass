@@ -1,6 +1,7 @@
 import React from 'react';
 import AverageDuration from './components/AverageDuration/AverageDuration'
 
+// Query: Average duration of specific crime per month/year
 const AverageDuration = () => (
     <div>
         <AverageDuration>
