@@ -1,4 +1,4 @@
-# CrimeCompass
+# MyCrimeCompass
 (Add demo GIF here)
 
 ## Application Description
