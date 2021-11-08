@@ -2,7 +2,7 @@
 (Add demo GIF here)
 
 ## Application Description
-Relationship Between Education Attainment and Financial Success
+(Add description here)
 
 ## Specifications
 SERN Stack
