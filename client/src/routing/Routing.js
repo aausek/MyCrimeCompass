@@ -9,6 +9,7 @@ import TimeOfDay from "../views/TimeOfDay/TimeOfDayView";
 // Add remaining routes
 const Routing = () => (
   <Routes>
+    <Route path="/" element={<Home />} />
     <Route path="/home" element={<Home />} />
     <Route path="/crime-by-time-of-day" element={<TimeOfDay />} />
     <Route path="/crime-by-average-duration" element={<AverageDuration />} />
