@@ -5,6 +5,8 @@ import AverageDuration from "../views/AverageDuration/AverageDurationView";
 import Precinct from "../views/Precinct/PrecinctView";
 import TimeOfDay from "../views/TimeOfDay/TimeOfDayView";
 
+
+// Add remaining routes
 const Routing = () => (
   <Routes>
     <Route path="/home" element={<Home />} />
