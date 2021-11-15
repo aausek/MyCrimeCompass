@@ -30,8 +30,8 @@ async function run() {
     let sql, binds, options, result;
 
     connection = await oracledb.getConnection({
-      user: "",
-      password: "",
+      user: "aausek",
+      password: "Ausek6493",
       connectString: "//oracle.cise.ufl.edu/orcl",
     });
 
@@ -57,33 +57,35 @@ async function run() {
     // Insert three rows
     //
 
-    sql = `INSERT INTO no_example VALUES (:1, :2)`;
+    // sql = `INSERT INTO no_example VALUES (:1, :2)`;
 
-    binds = [
-      [101, "Alpha"],
-      [102, "Beta"],
-      [103, "Gamma"],
-    ];
+    // binds = [
+    //   [101, "Alpha"],
+    //   [102, "Beta"],
+    //   [103, "Gamma"],
+    // ];
 
-    // For a complete list of options see the documentation.
-    options = {
-      autoCommit: true,
-      // batchErrors: true,  // continue processing even if there are data errors
-      bindDefs: [
-        { type: oracledb.NUMBER },
-        { type: oracledb.STRING, maxSize: 20 },
-      ],
-    };
+    // // For a complete list of options see the documentation.
+    // options = {
+    //   autoCommit: true,
+    //   // batchErrors: true,  // continue processing even if there are data errors
+    //   bindDefs: [
+    //     { type: oracledb.NUMBER },
+    //     { type: oracledb.STRING, maxSize: 20 },
+    //   ],
+    // };
 
-    result = await connection.executeMany(sql, binds, options);
+    // result = await connection.executeMany(sql, binds, options);
 
-    console.log("Number of rows inserted:", result.rowsAffected);
+    // console.log("Number of rows inserted:", result.rowsAffected);
 
     //
     // Query the data
     //
 
-    sql = `SELECT * FROM no_example`;
+    sql = `SELECT * 
+           FROM nmoody9899.crime
+           FETCH FIRST 1 ROWS ONLY`;
 
     binds = {};
 
@@ -97,8 +99,8 @@ async function run() {
 
     result = await connection.execute(sql, binds, options);
 
-    console.log("Metadata: ");
-    console.dir(result.metaData, { depth: null });
+    // console.log("Metadata: ");
+    // console.dir(result.metaData, { depth: null });
     console.log("Query results: ");
     console.dir(result.rows, { depth: null });
 
@@ -107,16 +109,18 @@ async function run() {
     //
 
     //sql = `SELECT TO_CHAR(CURRENT_DATE, 'DD-Mon-YYYY HH24:MI') AS CD FROM DUAL`;
-    result = await connection.execute(sql, binds, options);
-    console.log("Current date query results: ");
-    console.log(result.rows[0]["CD"]);
+    // result = await connection.execute(sql, binds, options);
+    // console.log("Current date query results: ");
+    // console.log(result.rows[0]["CD"]);
 
-    app.get("/api", (req, res) => {
-      res.send(result.rows);
-    });
+    // app.get("/api", (req, res) => {
+    //   res.send(result.rows);
+    //   console.log(result);
+    // });
 
     app.get("/home", (req, res) => {
-      res.send({ express: "Hello From Express" });
+      // res.send({ express: "Hello From Express" });
+      res.send(result.rows);
     });
   } catch (err) {
     console.error(err);
