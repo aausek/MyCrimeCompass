@@ -3,9 +3,7 @@ import Home from '../../components/Home/Home'
 
 const HomeView = () => (
     <div>
-        <Home>
-        
-        </Home>
+        <Home></Home>
     </div>
 )
 
