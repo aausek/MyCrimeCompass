@@ -1,21 +1,22 @@
 {
-  "name": "myschoolcompass",
+  "name": "mycrimecompass",
   "version": "1.0.0",
   "description": "(Add demo GIF here)",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aausek/MySchoolCompass.git"
+    "url": "git+https://github.com/aausek/MyCrimeCompass.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/aausek/MySchoolCompass/issues"
+    "url": "https://github.com/aausek/MyCrimeCompass/issues"
   },
-  "homepage": "https://github.com/aausek/MySchoolCompass#readme",
+  "homepage": "https://github.com/aausek/MyCrimeCompass#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",

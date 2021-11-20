@@ -1,21 +1,55 @@
-import React, { Component } from "react";
- 
-class Home extends Component {
-  render() {
+import React, { useEffect, useState } from "react";
+import GoogleMapReact from 'google-map-react';
+import Marker from '../Marker';
+
+const Home = () => {
+  const defaultProps = {
+    center: {
+      lat: 47.6062,
+      lng: -122.335167
+    },
+    zoom: 11
+  };
+  let [items, setItems] = useState([]);
+  let [dataLoaded, setDataLoaded] = useState(false);
+
+  useEffect(() => {
+    async function fetchData() {
+      let res = await fetch('/home/15');
+      res = await res.json();
+      setItems(res);
+      setDataLoaded(true);
+    }
+    fetchData();
+  }, [])
+  const renderData = () => {
+    if (!dataLoaded)
+      return (
+        <div>
+          <h1> Loading... </h1>{" "}
+        </div>
+      );
+    console.log(items);
     return (
-      <div>
-        <h2>Home Component</h2>
-        <p>Cras facilisis urna ornare ex volutpat, et
-        convallis erat elementum. Ut aliquam, ipsum vitae
-        gravida suscipit, metus dui bibendum est, eget rhoncus nibh
-        metus nec massa. Maecenas hendrerit laoreet augue
-        nec molestie. Cum sociis natoque penatibus et magnis
-        dis parturient montes, nascetur ridiculus mus.</p>
- 
-        <p>Duis a turpis sed lacus dapibus elementum sed eu lectus.</p>
+      <div style={{ height: '100vh', width: '100%' }}>
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: "AIzaSyCJCoYjXn5NE19djxVGFJhveEaXwqNkmC0" }}
+          defaultCenter={defaultProps.center}
+          defaultZoom={defaultProps.zoom}
+        >
+          {items.map(({OFFENSE_CODE, REPORT_NUMBER, LATITUDE, LONGITUDE}) => (
+            <Marker
+              key={REPORT_NUMBER}
+              text={OFFENSE_CODE}
+              lat={LATITUDE}
+              lng={LONGITUDE}
+            />
+          ))}
+        </GoogleMapReact>
       </div>
     );
   }
+  return renderData();
 }
- 
+
 export default Home;

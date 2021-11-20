@@ -5,6 +5,7 @@ class Precinct extends Component {
   render() {
     return (
       <div>
+        <br />
         <h2>Precinct Component</h2>
         <p>Cras facilisis urna ornare ex volutpat, et
         convallis erat elementum. Ut aliquam, ipsum vitae

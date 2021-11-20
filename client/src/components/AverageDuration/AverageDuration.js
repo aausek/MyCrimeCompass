@@ -5,6 +5,7 @@ class AverageDuration extends Component {
   render() {
     return (
       <div>
+        <br />
         <h2>Average Duration Component</h2>
         <p>Cras facilisis urna ornare ex volutpat, et
         convallis erat elementum. Ut aliquam, ipsum vitae
