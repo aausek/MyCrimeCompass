@@ -37,6 +37,18 @@ class App extends Component {
                       Crime By Precinct
                     </Nav.Link>
                   </Nav.Item>
+
+                  <Nav.Item>
+                    <Nav.Link as={Link} to="/quadrants">
+                      Quadrants
+                    </Nav.Link>
+                  
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link as={Link} to="/crime-blocks">
+                      Crime Blocks
+                    </Nav.Link>
+                  </Nav.Item>
                 </Nav>
               </Container>
             </Navbar>

@@ -3,7 +3,7 @@ const fs = require("fs");
 const cors = require("cors");
 const oracledb = require("oracledb");
 const dbConfig = require("./dbConfig.js");
-const queries = require("queryStrings.js")
+const queryStrings = require("./queryStrings.js");
 const app = express();
 
 const PORT = 3001;
@@ -48,6 +48,22 @@ async function run() {
       sql = `SELECT * 
             FROM nmoody9899.crime
             FETCH FIRST ${req.params.number} ROWS ONLY`;
+
+      binds = {};
+      options = {
+        outFormat: oracledb.OUT_FORMAT_OBJECT, // query result format
+        // extendedMetaData: true,               // get extra metadata
+        // prefetchRows:     100,                // internal buffer allocation size for tuning
+        // fetchArraySize:   100                 // internal buffer allocation size for tuning
+      };
+      result = await connection.execute(sql, binds, options);
+      res.send(result.rows);
+    });
+
+    app.get("/quadrants", async (req, res) => {
+      let sql, binds, options, result;
+      
+      sql = queryStrings.SeattleQuadrants;
 
       binds = {};
       options = {

@@ -1,19 +1,23 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "../views/HomeView";
-import AverageDuration from "../views/AverageDurationView";
-import Precinct from "../views/PrecinctView";
-import TimeOfDay from "../views/TimeOfDayView";
+import HomeView from "../views/HomeView";
+import AverageDurationView from "../views/AverageDurationView";
+import PrecinctView from "../views/PrecinctView";
+import TimeOfDayView from "../views/TimeOfDayView";
+import QuadrantsView from "../views/QuadrantsView";
+import CrimeBlocksView from "../views/CrimeBlocksView";
 
 
 // Add remaining routes
 const Routing = () => (
   <Routes>
-    <Route path="/" element={<Home />} />
-    <Route path="/home" element={<Home />} />
-    <Route path="/crime-by-time-of-day" element={<TimeOfDay />} />
-    <Route path="/crime-by-average-duration" element={<AverageDuration />} />
-    <Route path="/crime-by-precinct-highest-lowest" element={<Precinct />} />
+    <Route path="/" element={<HomeView />} />
+    <Route path="/home" element={<HomeView />} />
+    <Route path="/crime-by-time-of-day" element={<TimeOfDayView />} />
+    <Route path="/crime-by-average-duration" element={<AverageDurationView />} />
+    <Route path="/crime-by-precinct-highest-lowest" element={<PrecinctView />} />
+    <Route path="/quadrants" element={< QuadrantsView/>} />
+    <Route path="/crime-blocks" element={< CrimeBlocksView />} />
   </Routes>
 );
 
