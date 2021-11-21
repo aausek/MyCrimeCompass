@@ -1,5 +1,5 @@
 import React from 'react';
-import Precinct from '../../components/Precinct/Precinct'
+import Precinct from '../components/Precinct'
 
 // Query: Precinct with lowest/highest incidence of specific crime per month/year
 const PrecinctView = () => (

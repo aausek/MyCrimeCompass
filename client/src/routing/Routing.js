@@ -1,9 +1,9 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "../views/Home/HomeView";
-import AverageDuration from "../views/AverageDuration/AverageDurationView";
-import Precinct from "../views/Precinct/PrecinctView";
-import TimeOfDay from "../views/TimeOfDay/TimeOfDayView";
+import Home from "../views/HomeView";
+import AverageDuration from "../views/AverageDurationView";
+import Precinct from "../views/PrecinctView";
+import TimeOfDay from "../views/TimeOfDayView";
 
 
 // Add remaining routes

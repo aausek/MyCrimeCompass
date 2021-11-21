@@ -3,6 +3,7 @@ const fs = require("fs");
 const cors = require("cors");
 const oracledb = require("oracledb");
 const dbConfig = require("./dbConfig.js");
+const queries = require("queryStrings.js")
 const app = express();
 
 const PORT = 3001;

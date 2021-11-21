@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import GoogleMapReact from 'google-map-react';
-import Marker from '../Marker';
+import Marker from './Marker';
 
 const Home = () => {
   const defaultProps = {

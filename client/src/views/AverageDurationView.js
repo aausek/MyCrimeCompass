@@ -1,5 +1,5 @@
 import React from 'react';
-import AverageDuration from "../../components/AverageDuration/AverageDuration"
+import AverageDuration from "../components/AverageDuration"
 
 // Query: Average duration of specific crime per month/year
 const AverageDurationView = () => (
