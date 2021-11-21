@@ -1,15 +1,7 @@
 import React, { useEffect, useState } from "react";
-import GoogleMapReact from 'google-map-react';
-import Marker from './Marker';
 
 const Quadrants = () => {
-  const defaultProps = {
-    center: {
-      lat: 47.6062,
-      lng: -122.335167
-    },
-    zoom: 11
-  };
+
   let [items, setItems] = useState([]);
   let [dataLoaded, setDataLoaded] = useState(false);
 
@@ -31,22 +23,7 @@ const Quadrants = () => {
       );
     console.log(items);
     return (
-      <div style={{ height: '100vh', width: '100%' }}>
-        <GoogleMapReact
-          bootstrapURLKeys={{ key: "AIzaSyCJCoYjXn5NE19djxVGFJhveEaXwqNkmC0" }}
-          defaultCenter={defaultProps.center}
-          defaultZoom={defaultProps.zoom}
-        >
-          {items.map(({OFFENSE_CODE, REPORT_NUMBER, LATITUDE, LONGITUDE}) => (
-            <Marker
-              key={REPORT_NUMBER}
-              text={OFFENSE_CODE}
-              lat={LATITUDE}
-              lng={LONGITUDE}
-            />
-          ))}
-        </GoogleMapReact>
-      </div>
+      <h1>Quadrants Component</h1>
     );
   }
   return renderData();

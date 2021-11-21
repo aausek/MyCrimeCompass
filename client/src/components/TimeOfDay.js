@@ -1,23 +1,32 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 
-// Query: Time of day with higher incidence of specific crime per month/year
-class TimeOfDay extends Component {
-  render() {
+const TimeOfDay = () => {
+
+  let [items, setItems] = useState([]);
+  let [dataLoaded, setDataLoaded] = useState(false);
+
+  useEffect(() => {
+    async function fetchData() {
+      let res = await fetch('/crime-by-time-of-day');
+      res = await res.json();
+      setItems(res);
+      setDataLoaded(true);
+    }
+    fetchData();
+  }, [])
+  const renderData = () => {
+    if (!dataLoaded)
+      return (
+        <div>
+          <h1> Loading... </h1>{" "}
+        </div>
+      );
+    console.log(items);
     return (
-      <div>
-        <br />
-        <h2>Time of Day Component</h2>
-        <p>Cras facilisis urna ornare ex volutpat, et
-        convallis erat elementum. Ut aliquam, ipsum vitae
-        gravida suscipit, metus dui bibendum est, eget rhoncus nibh
-        metus nec massa. Maecenas hendrerit laoreet augue
-        nec molestie. Cum sociis natoque penatibus et magnis
-        dis parturient montes, nascetur ridiculus mus.</p>
- 
-        <p>Duis a turpis sed lacus dapibus elementum sed eu lectus.</p>
-      </div>
+      <h1>TimeOfDay Component</h1>
     );
   }
+  return renderData();
 }
- 
+
 export default TimeOfDay;

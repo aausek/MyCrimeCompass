@@ -1,42 +1,54 @@
 module.exports = {
   //Crimes by Quadrants of longitude/latitude
-  SeattleQuadrants: `SELECT 
-                QUADRANTS.CRIME_YEAR "Year"
-                ,QUADRANTS.QUADRANT "Quadrant"
-                ,COUNT(QUADRANTS.OFFENSE) "Crime Count"
-            FROM (
-                SELECT 
-                    D.YEAR CRIME_YEAR
-                    ,CASE
-                        WHEN C.LATITUDE > AVG_LAT AND C.LONGITUDE < AVG_LONG
-                            THEN 'NW'
-                        WHEN C.LATITUDE > AVG_LAT AND C.LONGITUDE > AVG_LONG 
-                            THEN 'NE'
-                        WHEN C.LATITUDE < AVG_LAT AND C.LONGITUDE < AVG_LONG
-                            THEN 'SW'
-                        WHEN C.LATITUDE < AVG_LAT AND C.LONGITUDE > AVG_LONG
-                            THEN 'SE'
-                        ELSE 'Unknonwn' END QUADRANT
-                    ,C.OFFENSE_ID OFFENSE
-                FROM CRIME C
-                    JOIN DATES D
-                        ON C.OFFENSE_START_DATE = D.CALENDAR_DATE,
-                (SELECT
-                    AVG(CRIME.LONGITUDE) AVG_LONG
-                    ,AVG(CRIME.lATITUDE) AVG_LAT
-                FROM CRIME
-                    JOIN DATES
-                        ON CRIME.OFFENSE_START_DATE = DATES.CALENDAR_DATE
-                WHERE DATES.YEAR >= 2008
-                    AND CRIME.LATITUDE <> 0
-                    AND CRIME.LONGITUDE <> 0)
-            ) QUADRANTS
-            WHERE QUADRANTS.CRIME_YEAR >= 2008
-            GROUP BY QUADRANTS.CRIME_YEAR, QUADRANTS.QUADRANT
-            FETCH FIRST 10 ROWS ONLY;`,
+  Quadrants: `SELECT
+  quadrants.crime_year     "Year",
+  quadrants.quadrant       "Quadrant",
+  COUNT(quadrants.offense) "Crime Count"
+FROM
+  (
+      SELECT
+          d.year       crime_year,
+          CASE
+              WHEN c.latitude > avg_lat
+                   AND c.longitude < avg_long THEN
+                  'NW'
+              WHEN c.latitude > avg_lat
+                   AND c.longitude > avg_long THEN
+                  'NE'
+              WHEN c.latitude < avg_lat
+                   AND c.longitude < avg_long THEN
+                  'SW'
+              WHEN c.latitude < avg_lat
+                   AND c.longitude > avg_long THEN
+                  'SE'
+              ELSE
+                  'Unknown'
+          END          quadrant,
+          c.offense_id offense
+      FROM
+               nmoody9899.crime c
+          JOIN nmoody9899.dates d ON c.offense_start_date = d.calendar_date,
+          (
+              SELECT
+                  AVG(crime.longitude) avg_long,
+                  AVG(crime.latitude)  avg_lat
+              FROM
+                       nmoody9899.crime
+                  JOIN nmoody9899.dates ON crime.offense_start_date = dates.calendar_date
+              WHERE
+                      dates.year >= 2008
+                  AND crime.latitude <> 0
+                  AND crime.longitude <> 0
+          )
+  ) quadrants
+WHERE
+  quadrants.crime_year >= 2008
+GROUP BY
+  quadrants.crime_year,
+  quadrants.quadrant;`,
 
   //100 blocks with the most crime by year/month
-  MostCrimeBlocks: `SELECT 
+  CrimeBlocks: `SELECT 
                 HIGHEST_CRIMES.CRIME_YEAR "Year"
                 ,HIGHEST_CRIMES.CRIME_MONTH "Month"
                 ,HIGHEST_CRIMES.ADDRESS "100 Block Address"
@@ -107,13 +119,15 @@ ORDER BY
     ,CAST(SUBSTR(DATES, 4, 2) AS INT) ASC;`,
 
   // OFFENSE
-  Offense: `SELECT DISTINCT OFFENSE_CODE, OFFENSE_NAME, OFFENSE_PARENT_GROUP, OFFENSE_GROUP, CRIME_AGAINST_CATEGORY
-    FROM CRIME_STAGE
-    GROUP BY OFFENSE_CODE, OFFENSE_NAME, OFFENSE_PARENT_GROUP, OFFENSE_GROUP, CRIME_AGAINST_CATEGORY
-    ORDER BY 1 ASC;`,
+  Offense: `SELECT DISTINCT OFFENSE_CODE, OFFENSE_NAME, OFFENSE_PARENT_GROUP, 
+            OFFENSE_GROUP, CRIME_AGAINST_CATEGORY
+            FROM CRIME_STAGE
+            GROUP BY OFFENSE_CODE, OFFENSE_NAME, OFFENSE_PARENT_GROUP, 
+                OFFENSE_GROUP, CRIME_AGAINST_CATEGORY
+            ORDER BY 1 ASC;`,
 
   // AVERAGE TIME OF DAY
-  AverageTimeOfDay: `SELECT 
+  CrimeTimeOfDay: `SELECT 
     TIMES "TIME_OF_DAY"
     ,CAST(SUBSTR(TIMES, 0, 8) AS TIMESTAMP) "TIME_OF_DAY_AS_TIME"
     ,CAST(SUBSTR(TIMES, 0, 2) AS INT) "TIME_HOUR"
@@ -140,7 +154,7 @@ ORDER BY
     ,CAST(SUBSTR(TIMES, 7, 2) AS INT) ASC;`,
 
   // CRIME
-  Crime: `SELECT
+  CrimeDuration: `SELECT
     REPORT_NUMBER
     ,OFFENSE_ID
     ,CAST(SUBSTR(OFFENSE_START_DATETIME, 0, 10) AS DATE) OFFENSE_START_DATE

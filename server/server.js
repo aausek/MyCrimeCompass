@@ -4,6 +4,7 @@ const cors = require("cors");
 const oracledb = require("oracledb");
 const dbConfig = require("./dbConfig.js");
 const queryStrings = require("./queryStrings.js");
+const { query } = require("express");
 const app = express();
 
 const PORT = 3001;
@@ -30,9 +31,9 @@ async function run() {
   try {
 
     connection = await oracledb.getConnection({
-      user: "aausek",
-      password: "Ausek6493",
-      connectString: "//oracle.cise.ufl.edu/orcl",
+      user: dbConfig.user,
+      password: dbConfig.password,
+      connectString: dbConfig.connectString,
     });
     
     // For a complete list of options see the documentation.
@@ -43,6 +44,7 @@ async function run() {
       // fetchArraySize:   100                 // internal buffer allocation size for tuning
     };
 
+    // TEST HOME ROUTE
     app.get("/home/:number", async (req, res) => {
       let sql, binds, options, result;
       sql = `SELECT * 
@@ -60,14 +62,15 @@ async function run() {
       res.send(result.rows);
     });
 
-    app.get("/quadrants", async (req, res) => {
+    // TIME OF DAY ROUTE
+    app.get("/crime-by-time-of-day", async (req, res) => {
       let sql, binds, options, result;
       
-      sql = queryStrings.SeattleQuadrants;
+      sql = queryStrings.CrimeTimeOfDay;
 
       binds = {};
       options = {
-        outFormat: oracledb.OUT_FORMAT_OBJECT, // query result format
+        outFormat: oracledb.OUT_FORMAT_OBJECT,   // query result format
         // extendedMetaData: true,               // get extra metadata
         // prefetchRows:     100,                // internal buffer allocation size for tuning
         // fetchArraySize:   100                 // internal buffer allocation size for tuning
@@ -75,6 +78,75 @@ async function run() {
       result = await connection.execute(sql, binds, options);
       res.send(result.rows);
     });
+    
+    // CRIME BY AVERAGE DURATION ROUTE
+    app.get("/crime-by-average-duration", async (req, res) => {
+      let sql, binds, options, result;
+      
+      sql = queryStrings.CrimeDuration;
+
+      binds = {};
+      options = {
+        outFormat: oracledb.OUT_FORMAT_OBJECT,   // query result format
+        // extendedMetaData: true,               // get extra metadata
+        // prefetchRows:     100,                // internal buffer allocation size for tuning
+        // fetchArraySize:   100                 // internal buffer allocation size for tuning
+      };
+      result = await connection.execute(sql, binds, options);
+      res.send(result.rows);
+    });
+    
+    // PRECINCT ROUTE
+    app.get("/crime-by-precinct-highest-lowest", async (req, res) => {
+      let sql, binds, options, result;
+      
+      sql = queryStrings.Offense;
+
+      binds = {};
+      options = {
+        outFormat: oracledb.OUT_FORMAT_OBJECT,   // query result format
+        // extendedMetaData: true,               // get extra metadata
+        // prefetchRows:     100,                // internal buffer allocation size for tuning
+        // fetchArraySize:   100                 // internal buffer allocation size for tuning
+      };
+      result = await connection.execute(sql, binds, options);
+      res.send(result.rows);
+    });
+    
+    // QUADRANTS ROUTE
+    app.get("/quadrants", async (req, res) => {
+      let sql, binds, options, result;
+      
+      sql = queryStrings.Quadrants;
+
+      binds = {};
+      options = {
+        outFormat: oracledb.OUT_FORMAT_OBJECT,   // query result format
+        // extendedMetaData: true,               // get extra metadata
+        // prefetchRows:     100,                // internal buffer allocation size for tuning
+        // fetchArraySize:   100                 // internal buffer allocation size for tuning
+      };
+      result = await connection.execute(sql, binds, options);
+      res.send(result.rows);
+    });
+   
+    // CRIME BLOCKS ROUTE
+    app.get("/crime-blocks", async (req, res) => {
+      let sql, binds, options, result;
+      
+      sql = queryStrings.CrimeBlocks;
+
+      binds = {};
+      options = {
+        outFormat: oracledb.OUT_FORMAT_OBJECT,   // query result format
+        // extendedMetaData: true,               // get extra metadata
+        // prefetchRows:     100,                // internal buffer allocation size for tuning
+        // fetchArraySize:   100                 // internal buffer allocation size for tuning
+      };
+      result = await connection.execute(sql, binds, options);
+      res.send(result.rows);
+    });
+    
   } catch (err) {
     console.error(err);
   }
