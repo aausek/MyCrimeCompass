@@ -13,9 +13,9 @@ const Routing = () => (
   <Routes>
     <Route path="/" element={<HomeView />} />
     <Route path="/home" element={<HomeView />} />
-    <Route path="/crime-by-time-of-day" element={<TimeOfDayView />} />
-    <Route path="/crime-by-average-duration" element={<AverageDurationView />} />
-    <Route path="/crime-by-precinct-highest-lowest" element={<PrecinctView />} />
+    <Route path="/time-of-day" element={<TimeOfDayView />} />
+    <Route path="/average-duration" element={<AverageDurationView />} />
+    <Route path="/precinct" element={<PrecinctView />} />
     <Route path="/quadrants" element={< QuadrantsView/>} />
     <Route path="/crime-blocks" element={< CrimeBlocksView />} />
   </Routes>

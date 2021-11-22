@@ -31,7 +31,12 @@ const Home = () => {
       );
     console.log(items);
     return (
+
+      // ADD SEATTLE PERIMETER
       <div style={{ height: '100vh', width: '100%' }}>
+        <div>
+          <h1>ADD APP INTRO HERE </h1>
+        </div>
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyCJCoYjXn5NE19djxVGFJhveEaXwqNkmC0" }}
           defaultCenter={defaultProps.center}

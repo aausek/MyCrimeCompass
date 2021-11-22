@@ -63,10 +63,10 @@ async function run() {
     });
 
     // TIME OF DAY ROUTE
-    app.get("/crime-by-time-of-day", async (req, res) => {
+    app.get("/time-of-day", async (req, res) => {
       let sql, binds, options, result;
       
-      sql = queryStrings.CrimeTimeOfDay;
+      sql = queryStrings.TimeOfDay;
 
       binds = {};
       options = {
@@ -80,10 +80,10 @@ async function run() {
     });
     
     // CRIME BY AVERAGE DURATION ROUTE
-    app.get("/crime-by-average-duration", async (req, res) => {
+    app.get("/average-duration", async (req, res) => {
       let sql, binds, options, result;
       
-      sql = queryStrings.CrimeDuration;
+      sql = queryStrings.AverageDuration;
 
       binds = {};
       options = {
@@ -97,10 +97,10 @@ async function run() {
     });
     
     // PRECINCT ROUTE
-    app.get("/crime-by-precinct-highest-lowest", async (req, res) => {
+    app.get("/precinct", async (req, res) => {
       let sql, binds, options, result;
       
-      sql = queryStrings.Offense;
+      sql = queryStrings.Precinct;
 
       binds = {};
       options = {

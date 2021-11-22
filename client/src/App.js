@@ -23,17 +23,17 @@ class App extends Component {
                   </Nav.Item>
 
                   <Nav.Item>
-                    <Nav.Link as={Link} to="/crime-by-time-of-day">Time of Day</Nav.Link>
+                    <Nav.Link as={Link} to="/time-of-day">Time of Day</Nav.Link>
                   </Nav.Item>
 
                   <Nav.Item>
-                    <Nav.Link as={Link} to="/crime-by-average-duration">
+                    <Nav.Link as={Link} to="/average-duration">
                       Average Duration
                     </Nav.Link>
                   </Nav.Item>
 
                   <Nav.Item>
-                    <Nav.Link as={Link} to="/crime-by-precinct-highest-lowest">
+                    <Nav.Link as={Link} to="/precinct">
                       Crime By Precinct
                     </Nav.Link>
                   </Nav.Item>

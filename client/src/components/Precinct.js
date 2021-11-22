@@ -7,7 +7,7 @@ const Precinct = () => {
 
   useEffect(() => {
     async function fetchData() {
-      let res = await fetch('/crime-by-precinct-highest-lowest');
+      let res = await fetch('/precinct');
       res = await res.json();
       setItems(res);
       setDataLoaded(true);

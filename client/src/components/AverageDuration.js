@@ -7,7 +7,7 @@ const AverageDuration = () => {
 
   useEffect(() => {
     async function fetchData() {
-      let res = await fetch('/crime-by-average-duration');
+      let res = await fetch('/average-duration');
       res = await res.json();
       setItems(res);
       setDataLoaded(true);
