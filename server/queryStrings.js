@@ -49,35 +49,35 @@ GROUP BY
 
   // 100 blocks with the most crime by year/month
   CrimeBlocks: `SELECT 
-                HIGHEST_CRIMES.CRIME_YEAR "Year"
-                ,HIGHEST_CRIMES.CRIME_MONTH "Month"
-                ,HIGHEST_CRIMES.ADDRESS "100 Block Address"
-                ,HIGHEST_CRIMES.OFFENSE_COUNT "Crime Count"
-            FROM (
-                SELECT
-                    ADDRESSES.CRIME_YEAR "CRIME_YEAR"
-                    ,ADDRESSES.CRIME_MONTH "CRIME_MONTH"
-                    ,ADDRESSES.ADDRESS "ADDRESS"
-                    ,COUNT(ADDRESSES.OFFENSE) "OFFENSE_COUNT"
-                    ,RANK() OVER (PARTITION BY
-                        ADDRESSES.CRIME_YEAR, ADDRESSES.CRIME_MONTH
-                        ORDER BY COUNT(ADDRESSES.OFFENSE) DESC
-                    ) "RANKING"
-                FROM (
-                    SELECT 
-                        D.YEAR "CRIME_YEAR"
-                        ,D.MONTH_NAME "CRIME_MONTH"
-                        ,REPLACE(ONE_HUNDRED_BLOCK_ADDRESS, 'XX', '00') "ADDRESS"
-                        ,C.OFFENSE_ID "OFFENSE"
-                    FROM CRIME C 
-                        JOIN DATES D
-                            ON C.OFFENSE_START_DATE = D.CALENDAR_DATE
-                    WHERE D.YEAR >= 2008
-                        AND C.ONE_HUNDRED_BLOCK_ADDRESS IS NOT NULL
-                ) ADDRESSES
-                GROUP BY ADDRESSES.CRIME_YEAR, ADDRESSES.CRIME_MONTH, ADDRESSES.ADDRESS
-            ) HIGHEST_CRIMES
-            WHERE HIGHEST_CRIMES.RANKING <= 5`,
+  HIGHEST_CRIMES.CRIME_YEAR "Year"
+  ,HIGHEST_CRIMES.CRIME_MONTH "Month"
+  ,HIGHEST_CRIMES.ADDRESS "100 Block Address"
+  ,HIGHEST_CRIMES.OFFENSE_COUNT "Crime Count"
+FROM (
+  SELECT
+      ADDRESSES.CRIME_YEAR "CRIME_YEAR"
+      ,ADDRESSES.CRIME_MONTH "CRIME_MONTH"
+      ,ADDRESSES.ADDRESS "ADDRESS"
+      ,COUNT(ADDRESSES.OFFENSE) "OFFENSE_COUNT"
+      ,RANK() OVER (PARTITION BY
+          ADDRESSES.CRIME_YEAR, ADDRESSES.CRIME_MONTH
+          ORDER BY COUNT(ADDRESSES.OFFENSE) DESC
+      ) "RANKING"
+  FROM (
+      SELECT 
+          D.YEAR "CRIME_YEAR"
+          ,D.MONTH_NAME "CRIME_MONTH"
+          ,REPLACE(ONE_HUNDRED_BLOCK_ADDRESS, 'XX', '00') "ADDRESS"
+          ,C.OFFENSE_ID "OFFENSE"
+      FROM nmoody9899.CRIME C 
+          JOIN nmoody9899.DATES D
+              ON C.OFFENSE_START_DATE = D.CALENDAR_DATE
+      WHERE D.YEAR >= 2008
+          AND C.ONE_HUNDRED_BLOCK_ADDRESS IS NOT NULL
+  ) ADDRESSES
+  GROUP BY ADDRESSES.CRIME_YEAR, ADDRESSES.CRIME_MONTH, ADDRESSES.ADDRESS
+) HIGHEST_CRIMES
+WHERE HIGHEST_CRIMES.RANKING <= 5`,
 
   // AVERAGE TIME OF DAY
   TimeOfDay: `SELECT

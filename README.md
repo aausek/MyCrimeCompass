@@ -18,4 +18,14 @@ Visualization: Highcharts JS library
 
 ## Installation Options
 
+`cd /client`\
+`npm install`\
+`npm start`
+
+`cd /server`\
+`npm install`\
+`npm start`
+
+Navigate to localhost:3000
+
 ## Completed Features

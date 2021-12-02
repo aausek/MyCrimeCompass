@@ -4,7 +4,6 @@ const cors = require("cors");
 const oracledb = require("oracledb");
 const dbConfig = require("./dbConfig.js");
 const queryStrings = require("./queryStrings.js");
-const { query } = require("express");
 const app = express();
 
 const PORT = 3001;
