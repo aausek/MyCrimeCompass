@@ -27,49 +27,41 @@ const TimeOfDay = () => {
         </div>
       );
       
-      console.log(items[0]);
-    //   let newData = []
-      
-    //   const options = {
-    //     title: {
-    //       text: "Time Of Day",
-    //     },
-    //     xAxis: {
-    //       categories: [],
-    //     },
-    //     yAxis: {
-    //       title: {
-    //         text: "Fruit eaten",
-    //       },
-    //     },
-    //     series: [
-    //       {
-    //         data: [],
-    //       },
-    //     ],
-    //   };
+      console.log(items);
+      let newData = []
+      for (let i = 0; i < items.length; i++) {
+        newData.push({
+          name: items[i]["Year"],
+          data: items[i]["Time Frame"]
+        });
+    }
+      const options = {
+        title: {
+          text: "Time Of Day",
+        },
+        xAxis: {
+          categories: [items[0]["Year"]],
+        },
+        yAxis: {
+          title: {
+            text: "Number of Crimes",
+          },
+        },
+        series: [
+          {
+            data : [items[0]["Number of Crimes"]],
+          },
+        ],
+      };
 
-    //   for (let i = 0; i < items.length; i++) {
-    //     newData.push({
-    //       x: items[i]["Time Frame"],
-    //       y: items[i].Year
-    //     });
-    // }
     // console.log(newData);
 
     // options.series[0].data = newData;
+    // options.xAxis[0].name;
+    console.log(newData);
 
     // this.setState({ data: newData });
 
-
-    const options = {
-      title: {
-        text: 'My chart'
-      },
-      series: [{
-        data: [1, 2, 3]
-      }]
-    }
     return (
       
       // HEATMAP - MONTHS ON Y-AXIS, TIMEOFDAY (ASC) ON X-AXIS
