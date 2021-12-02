@@ -29,3 +29,7 @@ Visualization: Highcharts JS library
 Navigate to localhost:3000
 
 ## Completed Features
+
+## Complex Trend Queries
+
+INSERT QUERIES HERE
