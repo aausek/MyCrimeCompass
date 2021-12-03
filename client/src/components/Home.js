@@ -25,7 +25,7 @@ const Home = () => {
   const renderData = () => {
     if (!dataLoaded)
       return (
-        <div>
+        <div><br />
           <h1> Loading... </h1>{" "}
         </div>
       );
