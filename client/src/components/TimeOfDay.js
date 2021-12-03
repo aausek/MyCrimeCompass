@@ -6,13 +6,19 @@ const TimeOfDay = () => {
 
   let [items, setItems] = useState([]);
   let [dataLoaded, setDataLoaded] = useState(false);
-
+  let [crimesDisplay, setCrimesDisplay] = useState([]);
+  let [years, setYears] = useState([])
+  const [year, setYear] = useState(2008);
+  const [month, setMonth] = useState("January");
   useEffect(() => {
     
     async function fetchData() {
       let res = await fetch('/time-of-day');
       res = await res.json();
       setItems(res);
+      let years = new Set();
+      res.forEach(obj => years.add(obj.Year));
+      setYears([...years]);
       setDataLoaded(true);
     }
     fetchData();
@@ -26,21 +32,22 @@ const TimeOfDay = () => {
           <h1> Loading... </h1>{" "}
         </div>
       );
-      
+      console.log(year);
+      console.log(month);
       console.log(items);
-      let newData = []
-      for (let i = 0; i < items.length; i++) {
-        newData.push({
-          name: items[i]["Year"],
-          data: items[i]["Time Frame"]
-        });
-    }
+      const crimesYear = items.filter(obj => obj.Year === year);
+      console.log(crimesYear);
+      const crimesMonthYear = crimesYear.filter(obj => obj.Month === month.toUpperCase());
+      console.log(crimesMonthYear);
+      const times = crimesMonthYear.map(obj => obj["Time Frame"]);
+      const numCrimes = crimesMonthYear.map(obj => obj["Number of Crimes"]);
+      
       const options = {
         title: {
-          text: "Time Of Day",
+          text: `Number of Crimes during ${month} ${year}`,
         },
         xAxis: {
-          categories: [items[0]["Year"]],
+          categories: times,
         },
         yAxis: {
           title: {
@@ -49,18 +56,10 @@ const TimeOfDay = () => {
         },
         series: [
           {
-            data : [items[0]["Number of Crimes"]],
+            data : numCrimes,
           },
         ],
       };
-
-    // console.log(newData);
-
-    // options.series[0].data = newData;
-    // options.xAxis[0].name;
-    console.log(newData);
-
-    // this.setState({ data: newData });
 
     return (
       
@@ -69,10 +68,28 @@ const TimeOfDay = () => {
       // YEAR RANGE AS USER FILTER
       
       <div style={{margin: "50px"}}>
-          {/* {this.state &&
-          this.state.items && ( */}
         <HighchartsReact highcharts={Highcharts} options={options}/> 
-        {/* )} */}
+        <form>
+          <label>Year</label>
+          <select value={year} onChange={event => setYear(parseInt(event.target.value))}>
+            {years.map(year => <option key={year}>{year}</option>)}
+          </select>
+          <label>Month</label>
+          <select value={month} onChange={event => setMonth(event.target.value)}>
+            <option>January</option>
+            <option>February</option>
+            <option>March</option>
+            <option>April</option>
+            <option>May</option>
+            <option>June</option>
+            <option>July</option>
+            <option>August</option>
+            <option>September</option>
+            <option>October</option>
+            <option>November</option>
+            <option>December</option>
+          </select>
+        </form>
       </div>  
     );
   }
