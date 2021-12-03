@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import GoogleMapReact from 'google-map-react';
 import Marker from './Marker';
+import "../assets/Home.css";
 
 const Home = () => {
   const defaultProps = {
@@ -37,6 +38,7 @@ const Home = () => {
         <div>
           <h1>ADD APP INTRO HERE </h1>
         </div>
+        <div class="map">
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyCJCoYjXn5NE19djxVGFJhveEaXwqNkmC0" }}
           defaultCenter={defaultProps.center}
@@ -51,6 +53,8 @@ const Home = () => {
             />
           ))}
         </GoogleMapReact>
+        </div>
+        
       </div>
     );
   }

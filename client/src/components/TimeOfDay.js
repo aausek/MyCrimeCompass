@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import "../assets/TimeOfDay.css";
 
 const TimeOfDay = () => {
   let [items, setItems] = useState([]);
@@ -28,7 +29,7 @@ const TimeOfDay = () => {
       return (
         <div>
           <br />
-          <h1> Loading... </h1>{" "}
+          <h1> Loading data... </h1>{" "}
         </div>
       );
 
@@ -52,6 +53,9 @@ const TimeOfDay = () => {
     const options = {
       chart: {
         type: "column",
+        borderRadius: 10,
+        width: 900,
+        height: 500
       },
       title: {
         text: `Number of Crimes During ${month} ${year}`,
@@ -68,6 +72,7 @@ const TimeOfDay = () => {
         {
           name: `${month} ${year}`,
           data: numCrimes,
+          colorByPoint: true,
         },
       ],
       plotOptions: {
@@ -82,6 +87,9 @@ const TimeOfDay = () => {
     const options2 = {
       chart: {
         type: "line",
+        borderRadius: 10,
+        width: 900,
+        height: 500
       },
       title: {
         text: `Number of Crimes During ${month} ${year}`,
@@ -114,39 +122,52 @@ const TimeOfDay = () => {
       // NUMBER OF CRIMES AS COLOR AXIS
       // YEAR RANGE AS USER FILTER
 
-      <div style={{ margin: "50px" }}>
-        <HighchartsReact highcharts={Highcharts} options={options} />
-        <br /><br /><br />
-        <HighchartsReact highcharts={Highcharts} options={options2} />
-        <form>
-          <label>Year</label>
-          <select
-            value={year}
-            onChange={(event) => setYear(parseInt(event.target.value))}
-          >
-            {years.map((year) => (
-              <option key={year}>{year}</option>
-            ))}
-          </select>
-          <label>Month</label>
-          <select
-            value={month}
-            onChange={(event) => setMonth(event.target.value)}
-          >
-            <option>January</option>
-            <option>February</option>
-            <option>March</option>
-            <option>April</option>
-            <option>May</option>
-            <option>June</option>
-            <option>July</option>
-            <option>August</option>
-            <option>September</option>
-            <option>October</option>
-            <option>November</option>
-            <option>December</option>
-          </select>
-        </form>
+      <div class="mainDiv" style={{ margin: "25px" }}>
+        <div class="filters">
+          <form>
+            <label>Month:</label>
+            <select
+              class="form-select"
+              value={month}
+              onChange={(event) => setMonth(event.target.value)}
+            >
+              <option>January</option>
+              <option>February</option>
+              <option>March</option>
+              <option>April</option>
+              <option>May</option>
+              <option>June</option>
+              <option>July</option>
+              <option>August</option>
+              <option>September</option>
+              <option>October</option>
+              <option>November</option>
+              <option>December</option>
+            </select>
+
+            <label>Year:</label>
+            <select
+              class="form-select"
+              value={year}
+              onChange={(event) => setYear(parseInt(event.target.value))}
+            >
+              {years.map((year) => (
+                <option key={year}>{year}</option>
+              ))}
+            </select>
+          </form>
+        </div>
+
+        <br />
+        <br />
+
+        <div class="charts">
+          <HighchartsReact highcharts={Highcharts} options={options} />
+          <br />
+          <br />
+          <br />
+          <HighchartsReact highcharts={Highcharts} options={options2} />
+        </div>
       </div>
     );
   };

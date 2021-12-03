@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import itemChart from "highcharts/modules/item-series";
+import "../assets/AverageDuration.css";
+
+itemChart(Highcharts);
 
 const AverageDuration = () => {
-
   let [items, setItems] = useState([]);
   let [dataLoaded, setDataLoaded] = useState(false);
   let [years, setYears] = useState([]);
@@ -26,11 +29,12 @@ const AverageDuration = () => {
   const renderData = () => {
     if (!dataLoaded)
       return (
-        <div><br />
-          <h1> Loading... </h1>{" "}
+        <div>
+          <br />
+          <h1> Loading data... </h1>{" "}
         </div>
       );
-    
+
     const crimesYear = items.filter((obj) => obj.Year === year);
     console.log(crimesYear);
 
@@ -48,6 +52,9 @@ const AverageDuration = () => {
     const options = {
       chart: {
         type: "column",
+        borderRadius: 10,
+        width: 900,
+        height: 500,
       },
       title: {
         text: `Average Duration of Crimes During ${month} ${year}`,
@@ -64,19 +71,23 @@ const AverageDuration = () => {
         {
           name: `${month} ${year}`,
           data: days,
+          colorByPoint: true,
         },
       ],
       tooltip: {
         enabled: true,
-        formatter: function(){
-            return Math.round(parseInt(this.y));
-        }
-    }    
+        formatter: function () {
+          return Math.round(parseInt(this.y));
+        },
+      },
     };
 
     const options2 = {
       chart: {
         type: "line",
+        borderRadius: 10,
+        width: 900,
+        height: 500,
       },
       title: {
         text: `Average Duration of Crimes During ${month} ${year}`,
@@ -97,10 +108,10 @@ const AverageDuration = () => {
       ],
       tooltip: {
         enabled: true,
-        formatter: function(){
-            return Math.round(parseInt(this.y));
-        }
-      }    
+        formatter: function () {
+          return Math.round(parseInt(this.y));
+        },
+      },
     };
 
     const options3 = {
@@ -109,6 +120,9 @@ const AverageDuration = () => {
         plotBorderWidth: null,
         plotShadow: false,
         type: "pie",
+        borderRadius: 10,
+        width: 900,
+        height: 500,
       },
       title: {
         text: `Average Duration of Crimes During ${month} ${year}`,
@@ -134,7 +148,33 @@ const AverageDuration = () => {
       series: [
         {
           name: `${month} ${year}`,
-          data: days
+          data: days,
+        },
+      ],
+    };
+
+    const options4 = {
+      chart: {
+        type: "item",
+        borderRadius: 10,
+        width: 900,
+        height: 500,
+      },
+
+      title: {
+        text: `Average Duration of Crimes During ${month} ${year}`,
+      },
+      legend: {
+        labelFormat: '{name} <span style="opacity: 0.4">{y}</span>',
+      },
+      series: [
+        {
+          name: `${month} ${year}`,
+          data: days,
+          dataLabels: {
+            enabled: true,
+            format: "{point.label}",
+          },
         },
       ],
     };
@@ -144,41 +184,59 @@ const AverageDuration = () => {
       // NUMBER OF CRIMES AS COLOR AXIS
       // YEAR RANGE AS USER FILTER
 
-      <div style={{ margin: "50px" }}>
-        <HighchartsReact highcharts={Highcharts} options={options} />
-        <br /><br /><br />
-        <HighchartsReact highcharts={Highcharts} options={options2} />
-        <br /><br /><br />
-        <HighchartsReact highcharts={Highcharts} options={options3} />
-        <form>
-          <label>Year</label>
-          <select
-            value={year}
-            onChange={(event) => setYear(parseInt(event.target.value))}
-          >
-            {years.map((year) => (
-              <option key={year}>{year}</option>
-            ))}
-          </select>
-          <label>Month</label>
-          <select
-            value={month}
-            onChange={(event) => setMonth(event.target.value)}
-          >
-            <option>January</option>
-            <option>February</option>
-            <option>March</option>
-            <option>April</option>
-            <option>May</option>
-            <option>June</option>
-            <option>July</option>
-            <option>August</option>
-            <option>September</option>
-            <option>October</option>
-            <option>November</option>
-            <option>December</option>
-          </select>
-        </form>
+      <div class="mainDiv" style={{ margin: "50px" }}>
+        <div class="filters">
+          <form>
+            <label>Month:</label>
+            <select
+              class="form-select"
+              value={month}
+              onChange={(event) => setMonth(event.target.value)}
+            >
+              <option>January</option>
+              <option>February</option>
+              <option>March</option>
+              <option>April</option>
+              <option>May</option>
+              <option>June</option>
+              <option>July</option>
+              <option>August</option>
+              <option>September</option>
+              <option>October</option>
+              <option>November</option>
+              <option>December</option>
+            </select>
+
+            <label>Year:</label>
+            <select
+              class="form-select"
+              value={year}
+              onChange={(event) => setYear(parseInt(event.target.value))}
+            >
+              {years.map((year) => (
+                <option key={year}>{year}</option>
+              ))}
+            </select>
+          </form>
+        </div>
+
+        <br />
+        <br />
+        <div class="charts">
+          <HighchartsReact highcharts={Highcharts} options={options} />
+          <br />
+          <br />
+          <br />
+          <HighchartsReact highcharts={Highcharts} options={options2} />
+          <br />
+          <br />
+          <br />
+          <HighchartsReact highcharts={Highcharts} options={options3} />
+          <br />
+          <br />
+          <br />
+          <HighchartsReact highcharts={Highcharts} options={options4} />
+        </div>
       </div>
     );
   };
