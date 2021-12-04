@@ -17,6 +17,7 @@ const TimeOfDay = () => {
       res = await res.json();
       setItems(res);
       let years = new Set();
+      // console.log(res);
       res.forEach((obj) => years.add(obj.Year));
       setYears([...years]);
       setDataLoaded(true);
@@ -70,7 +71,8 @@ const TimeOfDay = () => {
       },
       series: [
         {
-          name: `${month} ${year}`,
+          // name: `${month} ${year}`,
+          showInLegend: false,
           data: numCrimes,
           colorByPoint: true,
         },
@@ -118,9 +120,10 @@ const TimeOfDay = () => {
     };
 
     return (
-      // HEATMAP - MONTHS ON Y-AXIS, TIMEOFDAY (ASC) ON X-AXIS
-      // NUMBER OF CRIMES AS COLOR AXIS
-      // YEAR RANGE AS USER FILTER
+
+      // TODO: TIME RANGE FILTER
+      // SORT TIME FRAMES
+      // RESET FILTERS BUTTON
 
       <div class="mainDiv" style={{ margin: "25px" }}>
         <div class="filters">
@@ -163,10 +166,10 @@ const TimeOfDay = () => {
 
         <div class="charts">
           <HighchartsReact highcharts={Highcharts} options={options} />
+          {/* <br />
           <br />
           <br />
-          <br />
-          <HighchartsReact highcharts={Highcharts} options={options2} />
+          <HighchartsReact highcharts={Highcharts} options={options2} /> */}
         </div>
       </div>
     );

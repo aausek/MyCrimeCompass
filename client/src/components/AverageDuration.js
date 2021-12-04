@@ -17,9 +17,10 @@ const AverageDuration = () => {
     async function fetchData() {
       let res = await fetch("/average-duration");
       res = await res.json();
+      console.log(res);
       setItems(res);
       let years = new Set();
-      res.forEach((obj) => years.add(obj.Year));
+      Object.entries(res).forEach((obj) => years.add(obj.Year));
       setYears([...years]);
       setDataLoaded(true);
     }
@@ -35,6 +36,7 @@ const AverageDuration = () => {
         </div>
       );
 
+    // console.log(items);
     const crimesYear = items.filter((obj) => obj.Year === year);
     console.log(crimesYear);
 
@@ -69,7 +71,8 @@ const AverageDuration = () => {
       },
       series: [
         {
-          name: `${month} ${year}`,
+          // name: `${month} ${year}`,
+          showInLegend: false, 
           data: days,
           colorByPoint: true,
         },
@@ -180,9 +183,9 @@ const AverageDuration = () => {
     };
 
     return (
-      // HEATMAP - MONTHS ON Y-AXIS, TIMEOFDAY (ASC) ON X-AXIS
-      // NUMBER OF CRIMES AS COLOR AXIS
-      // YEAR RANGE AS USER FILTER
+      // TODO: FILTER TO RANK BY X NUMBER
+      // TOP CHART FOR DURATION
+      // BOTTOM CHART FOR COUNT
 
       <div class="mainDiv" style={{ margin: "50px" }}>
         <div class="filters">
@@ -227,14 +230,14 @@ const AverageDuration = () => {
           <br />
           <br />
           <br />
-          <HighchartsReact highcharts={Highcharts} options={options2} />
+          {/* <HighchartsReact highcharts={Highcharts} options={options2} />
           <br />
           <br />
+          <br /> */}
+          {/* <HighchartsReact highcharts={Highcharts} options={options3} />
           <br />
-          <HighchartsReact highcharts={Highcharts} options={options3} />
           <br />
-          <br />
-          <br />
+          <br /> */}
           <HighchartsReact highcharts={Highcharts} options={options4} />
         </div>
       </div>

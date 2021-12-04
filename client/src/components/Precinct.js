@@ -118,9 +118,7 @@ const Precinct = () => {
     };
 
     return (
-      // HEATMAP - MONTHS ON Y-AXIS, TIMEOFDAY (ASC) ON X-AXIS
-      // NUMBER OF CRIMES AS COLOR AXIS
-      // YEAR RANGE AS USER FILTER
+      // TODO: BAR CHART
 
       <div class="mainDiv" style={{ margin: "25px" }}>
         <div class="filters">

@@ -80,9 +80,10 @@ async function run() {
     
     // CRIME BY AVERAGE DURATION ROUTE
     app.get("/average-duration", async (req, res) => {
-      let sql, binds, options, result;
+      let query1, query2, binds, options, resultAvgDur, resultCtDur;
       
-      sql = queryStrings.AverageDuration;
+      query1 = queryStrings.AverageDuration;
+      query2 = queryStrings.CountDuration;
 
       binds = {};
       options = {
@@ -91,8 +92,10 @@ async function run() {
         // prefetchRows:     100,                // internal buffer allocation size for tuning
         // fetchArraySize:   100                 // internal buffer allocation size for tuning
       };
-      result = await connection.execute(sql, binds, options);
-      res.send(result.rows);
+      resultAvgDur = await connection.execute(query1, binds, options);
+      resultCtDur = await connection.execute(query2, binds, options);
+      // res.send(resultAvgDur.rows);
+      res.json({resultAvgDur : resultAvgDur.rows, resultCtDur : resultCtDur.rows});
     });
     
     // PRECINCT ROUTE
