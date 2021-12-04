@@ -44,24 +44,30 @@ const Precinct = () => {
     );
     console.log(crimesMonthYear);
 
-    const times = crimesMonthYear.map((obj) => obj["Time Frame"]);
-    console.log(times);
+    const precincts = crimesMonthYear.map((obj) => obj["Precinct"]);
+    console.log(precincts);
 
-    const numCrimes = crimesMonthYear.map((obj) => obj["Number of Crimes"]);
-    console.log(numCrimes);
+    const mcpp = crimesMonthYear.map((obj) => obj["MCPP"]);
+    console.log(mcpp);
+
+    const precName = mcpp.concat(' ', precincts);
+    console.log(precName);
+
+    const offenses = crimesMonthYear.map((obj) => obj["Number of Offenses"]);
+    console.log(offenses);
 
     const options = {
       chart: {
-        type: "column",
+        type: "bar",
         borderRadius: 10,
         width: 900,
         height: 500
       },
       title: {
-        text: `Number of Crimes During ${month} ${year}`,
+        text: `Top 5 Precincts Per Crime Count on ${month} ${year}`,
       },
       xAxis: {
-        categories: times,
+        categories: mcpp,
       },
       yAxis: {
         title: {
@@ -70,8 +76,9 @@ const Precinct = () => {
       },
       series: [
         {
-          name: `${month} ${year}`,
-          data: numCrimes,
+          name: "Offenses count",
+          showInLegend: false,
+          data: offenses,
           colorByPoint: true,
         },
       ],
@@ -95,7 +102,7 @@ const Precinct = () => {
         text: `Number of Crimes During ${month} ${year}`,
       },
       xAxis: {
-        categories: times,
+        categories: precincts,
       },
       yAxis: {
         title: {
@@ -105,7 +112,7 @@ const Precinct = () => {
       series: [
         {
           name: `${month} ${year}`,
-          data: numCrimes,
+          data: offenses,
         },
       ],
       plotOptions: {
@@ -161,10 +168,10 @@ const Precinct = () => {
 
         <div class="charts">
           <HighchartsReact highcharts={Highcharts} options={options} />
+          {/* <br />
           <br />
           <br />
-          <br />
-          <HighchartsReact highcharts={Highcharts} options={options2} />
+          <HighchartsReact highcharts={Highcharts} options={options2} /> */}
         </div>
       </div>
     );
