@@ -17,10 +17,11 @@ const AverageDuration = () => {
     async function fetchData() {
       let res = await fetch("/average-duration");
       res = await res.json();
-      console.log(res);
+      // console.log(res);
       setItems(res);
       let years = new Set();
-      Object.entries(res).forEach((obj) => years.add(obj.Year));
+      res.resultAvgDur.forEach((obj) => years.add(obj.Year));
+      res.resultCtDur.forEach((obj) => years.add(obj.Year));
       setYears([...years]);
       setDataLoaded(true);
     }
@@ -37,19 +38,35 @@ const AverageDuration = () => {
       );
 
     // console.log(items);
-    const crimesYear = items.filter((obj) => obj.Year === year);
-    console.log(crimesYear);
+    const crimesYearAvg = items.resultAvgDur.filter((obj) => obj.Year === year);
+    console.log(crimesYearAvg);
 
-    const crimesMonthYear = crimesYear.filter(
+    const crimesMonthYearAvg = crimesYearAvg.filter(
       (obj) => obj.Month === month.toUpperCase()
     );
-    console.log(crimesMonthYear);
+    console.log(crimesMonthYearAvg);
 
-    const offense = crimesMonthYear.map((obj) => obj["Offense"]);
-    console.log(offense);
+    const offenseAvg = crimesMonthYearAvg.map((obj) => obj["Offense"]);
+    // console.log(offenseAvg);
 
-    const days = crimesMonthYear.map((obj) => obj["Average Length (Days)"]);
-    console.log(days);
+    const days = crimesMonthYearAvg.map((obj) => obj["Average Length (Days)"]);
+    // console.log(days);
+
+    const crimesYearCt = items.resultCtDur.filter((obj) => obj.Year === year);
+    // console.log(crimesYearCt);
+
+    
+
+    const crimesMonthYearCt = crimesYearCt.filter(
+      (obj) => obj.Month === month.toUpperCase()
+    );
+    console.log(crimesMonthYearCt);
+
+    const offenseCt = crimesMonthYearCt.map((obj) => obj["Offense"]);
+    // console.log(offenseCt);
+
+    const crimeCount = crimesMonthYearCt.map((obj) => obj["Number of Crimes"]);
+    // console.log(crimeCount);
 
     const options = {
       chart: {
@@ -59,10 +76,10 @@ const AverageDuration = () => {
         height: 500,
       },
       title: {
-        text: `Average Duration of Crimes During ${month} ${year}`,
+        text: `Average Duration (in Days ) of Crimes On ${month} ${year}`,
       },
       xAxis: {
-        categories: offense,
+        categories: offenseAvg,
       },
       yAxis: {
         title: {
@@ -96,7 +113,7 @@ const AverageDuration = () => {
         text: `Average Duration of Crimes During ${month} ${year}`,
       },
       xAxis: {
-        categories: offense,
+        categories: offenseAvg,
       },
       yAxis: {
         title: {
@@ -165,18 +182,19 @@ const AverageDuration = () => {
       },
 
       title: {
-        text: `Average Duration of Crimes During ${month} ${year}`,
+        text: `Top 5 Offenses Per Count on ${month} ${year}`,
       },
       legend: {
-        labelFormat: '{name} <span style="opacity: 0.4">{y}</span>',
+        labelFormat: `{name} <span style="opacity: 0.4">{y}</span>`,
       },
       series: [
         {
-          name: `${month} ${year}`,
-          data: days,
+          name: `${offenseCt}`,
+          // showInLegend: false,
+          data: crimeCount,
           dataLabels: {
             enabled: true,
-            format: "{point.label}",
+            format: "{point}",
           },
         },
       ],

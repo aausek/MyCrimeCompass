@@ -64,7 +64,7 @@ const Precinct = () => {
         height: 500
       },
       title: {
-        text: `Top 5 Precincts Per Crime Count on ${month} ${year}`,
+        text: `Top 5 Precincts Per Offense Count on ${month} ${year}`,
       },
       xAxis: {
         categories: mcpp,

@@ -59,7 +59,7 @@ const TimeOfDay = () => {
         height: 500
       },
       title: {
-        text: `Number of Crimes During ${month} ${year}`,
+        text: `Incidence of Crimes Per Hour Interval on ${month} ${year}`,
       },
       xAxis: {
         categories: times,
