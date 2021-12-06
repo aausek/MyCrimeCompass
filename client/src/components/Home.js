@@ -17,7 +17,7 @@ const Home = () => {
 
   useEffect(() => {
     async function fetchData() {
-      let res = await fetch('/home/120');
+      let res = await fetch('/home/30');
       res = await res.json();
       setItems(res);
       setDataLoaded(true);
@@ -58,7 +58,7 @@ const Home = () => {
                 ({ OFFENSE_CODE, REPORT_NUMBER, LATITUDE, LONGITUDE }) => (
                   <Marker
                     key={REPORT_NUMBER}
-                    text={OFFENSE_CODE}
+                    // text={OFFENSE_CODE}
                     lat={LATITUDE}
                     lng={LONGITUDE}
                   />

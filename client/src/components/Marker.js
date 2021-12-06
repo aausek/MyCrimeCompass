@@ -3,27 +3,33 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 18px;
-  height: 18px;
-  background-color: #000;
-  border: 2px solid #fff;
-  border-radius: 100%;
-  user-select: none;
-  transform: translate(-50%, -50%);
-  cursor: ${(props) => (props.onClick ? 'pointer' : 'default')};
-  &:hover {
-    z-index: 1;
+position: absolute;
+top: 60%;
+left: 50%;
+width: 35px;
+height: 35px;
+background-color: red;
+border: 2px solid #fff;
+border-radius: 100%;
+user-select: none;
+transform: translate(-50%, -50%);
+&:hover {
+  z-index: 1;
   }
 `;
 
-const Marker = ({ text, onClick}) => (
-  <Wrapper
-    alt={text}
-    onClick={onClick}
-  />
+// const Marker = ({text}) => (
+//   <Wrapper
+//     text={text}
+//   />
+// );
+
+const Marker = ({ text, tooltip }) => (
+  <Wrapper>
+    <span style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop : '7px'}} title={tooltip}>
+      {text}
+    </span>
+  </Wrapper>
 );
 
 Marker.defaultProps = {

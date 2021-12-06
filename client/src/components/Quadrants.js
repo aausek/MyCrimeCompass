@@ -62,36 +62,35 @@ const Quadrants = () => {
 
     const crimesWithLocs = crimesMonthYear.map(obj => {
       switch (obj.Quadrant) {
-        case "SW":
-          obj["lat"] = "47.6062";
-          obj["lng"] = "-122.335167";
+        case "NE":
+          obj["lat"] = "47.620818";
+          obj["lng"] = "-122.315295";
           break;
-        // case "NW":
-        //   obj.lat = "47.6062";
-        //   obj.lng = "-122.335167";
-        //   break;
-        // case "SE":
-        //   obj.lat = "47.6062";
-        //   obj.lng = "-122.335167";
-        //   break;
-        // case "NE":
-        //   obj.lat = "47.6062";
-        //   obj.lng = "-122.335167";
-        //   break;
-      
-        // default:
-        //   break;
+        case "NW":
+          obj["lat"] = "47.634089";
+          obj["lng"] = "-122.366211";
+          break;
+        case "SE":
+          obj["lat"] = "47.573275"; 
+          obj["lng"] = "-122.305052";
+          break;
+        case "SW":
+          obj["lat"] = "47.566420";
+          obj["lng"] = "-122.368982";
+          break;
       }
+      console.log(crimeCount);
+      return obj;
     });
 
     const markers = crimesWithLocs.map((obj, index) => (
       <Marker
-        key={index}
-        // lat={obj.lat}
-        // lng={obj.lng}
-        // text={obj["Crime Count"]}
+      key={index}
+      lat={obj.lat}
+      lng={obj.lng}
+      text={obj["Crime Count"]}
       />
-    ));
+      ));
 
     // const options = {
     //   chart: {
@@ -206,7 +205,7 @@ const Quadrants = () => {
       // YEAR RANGE AS USER FILTER
 
       <div class="mainDiv" style={{ margin: "50px" }}>
-        <div class="filters">
+                <div class="filters">
           <form>
             <label>Month:</label>
             <select
@@ -249,6 +248,7 @@ const Quadrants = () => {
           bootstrapURLKeys={{ key: "AIzaSyCJCoYjXn5NE19djxVGFJhveEaXwqNkmC0" }}
           defaultCenter={mapProps.center}
           defaultZoom={mapProps.zoom}>
+            
             {markers}
         </GoogleMapReact>
 

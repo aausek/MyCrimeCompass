@@ -44,3 +44,10 @@ h1{
 label, h4 {
     font-size: 1.5rem;
 }
+
+span{
+    color: black;
+    font-weight: 500;
+    align-items: center; 
+    justify-content: center;
+}
