@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Highcharts from "highcharts";
+import Highcharts, { numberFormat } from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import Spinner from "react-bootstrap/Spinner";
 import GoogleMapReact from 'google-map-react';
 import Marker from './Marker';
 import "../assets/Quadrants.css";
@@ -27,64 +28,101 @@ const Quadrants = () => {
   }, []);
 
   const renderData = () => {
+
     if (!dataLoaded)
-      return (
-        <div>
-          <br />
+    return (
+      <div>
+        <br />
           <h1> Loading data... </h1>{" "}
-        </div>
+          <br />
+         <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </div>
       );
 
-    // console.log(year);
-    // console.log(month);
-    // console.log(items);
     const crimesYear = items.filter((obj) => obj.Year === year);
     console.log(crimesYear);
 
+    
     const crimesMonthYear = crimesYear.filter(
       (obj) => obj.Month === month.toUpperCase()
-    );
-    console.log(crimesMonthYear);
+      );
+    
+    const quadrant = crimesMonthYear.map((obj) => obj["Quadrant"]);
+    console.log(quadrant);
+  
+    const crimeCount = crimesMonthYear.map((obj) => obj["Crime Count"]);
+    console.log(crimeCount);
 
-    const times = crimesMonthYear.map((obj) => obj["Time Frame"]);
-    console.log(times);
+    const crimesWithLocs = crimesMonthYear.map(obj => {
+      switch (obj.Quadrant) {
+        case "SW":
+          obj["lat"] = "47.6062";
+          obj["lng"] = "-122.335167";
+          break;
+        // case "NW":
+        //   obj.lat = "47.6062";
+        //   obj.lng = "-122.335167";
+        //   break;
+        // case "SE":
+        //   obj.lat = "47.6062";
+        //   obj.lng = "-122.335167";
+        //   break;
+        // case "NE":
+        //   obj.lat = "47.6062";
+        //   obj.lng = "-122.335167";
+        //   break;
+      
+        // default:
+        //   break;
+      }
+    });
 
-    const numCrimes = crimesMonthYear.map((obj) => obj["Number of Crimes"]);
-    console.log(numCrimes);
+    const markers = crimesWithLocs.map((obj, index) => (
+      <Marker
+        key={index}
+        // lat={obj.lat}
+        // lng={obj.lng}
+        // text={obj["Crime Count"]}
+      />
+    ));
+    
 
-    const options = {
-      chart: {
-        type: "column",
-        borderRadius: 10,
-        width: 900,
-        height: 500
-      },
-      title: {
-        text: `Number of Crimes During ${month} ${year}`,
-      },
-      xAxis: {
-        categories: times,
-      },
-      yAxis: {
-        title: {
-          text: "Volume",
-        },
-      },
-      series: [
-        {
-          name: `${month} ${year}`,
-          data: numCrimes,
-          colorByPoint: true,
-        },
-      ],
-      plotOptions: {
-        line: {
-          dataLabels: {
-            enabled: true,
-          },
-        },
-      },
-    };
+
+    // const options = {
+    //   chart: {
+    //     type: "column",
+    //     borderRadius: 10,
+    //     width: 900,
+    //     height: 500
+    //   },
+    //   title: {
+    //     text: `Number of Crimes During ${month} ${year}`,
+    //   },
+    //   xAxis: {
+    //     categories: quadrant,
+    //   },
+    //   yAxis: {
+    //     title: {
+    //       text: "Volume",
+    //     },
+    //   },
+    //   series: [
+    //     {
+    //       name: `${month} ${year}`,
+    //       data: crimeCount,
+    //       colorByPoint: true,
+    //     },
+    //   ],
+    //   plotOptions: {
+    //     line: {
+    //       dataLabels: {
+    //         enabled: true,
+    //       },
+    //     },
+    //   },
+    // };
 
     const options2 = {
       chart: {
@@ -94,10 +132,10 @@ const Quadrants = () => {
         height: 500
       },
       title: {
-        text: `Number of Crimes During ${month} ${year}`,
+        text: `Number of Crimes Per City Quadrant During ${month} ${year}`,
       },
       xAxis: {
-        categories: times,
+        categories: quadrant,
       },
       yAxis: {
         title: {
@@ -107,7 +145,8 @@ const Quadrants = () => {
       series: [
         {
           name: `${month} ${year}`,
-          data: numCrimes,
+          data: crimeCount,
+          colorByPoint: true,
         },
       ],
       plotOptions: {
@@ -126,11 +165,12 @@ const Quadrants = () => {
       },
       zoom: 11
     };
+
     return (
       // HEATMAP - MONTHS ON Y-AXIS, TIMEOFDAY (ASC) ON X-AXIS
       // YEAR RANGE AS USER FILTER
 
-      <div class="mainDiv" style={{ margin: "25px" }}>
+      <div class="mainDiv" style={{ margin: "50px" }}>
         <div class="filters">
           <form>
             <label>Month:</label>
@@ -165,28 +205,26 @@ const Quadrants = () => {
             </select>
           </form>
         </div>
-
+        
         <br />
         <br />
 
-        <div >
-          <h1>ADD APP INTRO HERE </h1>
-        </div>
-        <div style={{ height: '100vh', width: '100%' }}>
+        {/* <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyCJCoYjXn5NE19djxVGFJhveEaXwqNkmC0" }}
           defaultCenter={mapProps.center}
-          defaultZoom={mapProps.zoom}
-        >
-          {items.map(({OFFENSE_CODE, REPORT_NUMBER, LATITUDE, LONGITUDE}) => (
-            <Marker
-              key={REPORT_NUMBER}
-              text={OFFENSE_CODE}
-              lat={LATITUDE}
-              lng={LONGITUDE}
-            />
-          ))}
+          defaultZoom={mapProps.zoom}>
+            {markers}
         </GoogleMapReact>
+
+        </div> */}
+
+        <div class="charts">
+          <HighchartsReact highcharts={Highcharts} options={options2} />
+          {/* <br />
+          <br />
+          <br />
+          <HighchartsReact highcharts={Highcharts} options={options2} /> */}
         </div>
 
       </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import itemChart from "highcharts/modules/item-series";
+import Spinner from "react-bootstrap/Spinner";
 import "../assets/AverageDuration.css";
 
 itemChart(Highcharts);
@@ -33,7 +34,11 @@ const AverageDuration = () => {
       return (
         <div>
           <br />
-          <h1> Loading data... </h1>{" "}
+            <h1> Loading data... </h1>{" "}
+            <br />
+           <Spinner animation="border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
         </div>
       );
 

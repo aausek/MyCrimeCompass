@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import Spinner from "react-bootstrap/Spinner";
 import networkGraph from "highcharts/modules/networkgraph";
 import "../assets/CrimeBlocks.css";
 
@@ -29,11 +30,15 @@ const CrimeBlocks = () => {
 
   const renderData = () => {
     if (!dataLoaded)
-      return (
-        <div>
-          <br />
+    return (
+      <div>
+        <br />
           <h1> Loading data... </h1>{" "}
-        </div>
+          <br />
+         <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </div>
       );
 
     // console.log(year);

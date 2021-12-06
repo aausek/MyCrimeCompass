@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import Spinner from "react-bootstrap/Spinner";
 import "../assets/TimeOfDay.css";
 
 const TimeOfDay = () => {
@@ -27,11 +28,15 @@ const TimeOfDay = () => {
 
   const renderData = () => {
     if (!dataLoaded)
-      return (
-        <div>
-          <br />
+    return (
+      <div>
+        <br />
           <h1> Loading data... </h1>{" "}
-        </div>
+          <br />
+         <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </div>
       );
 
     // console.log(year);
