@@ -81,7 +81,7 @@ const AverageDuration = () => {
         height: 500,
       },
       title: {
-        text: `Average Duration (in Days ) of Crimes On ${month} ${year}`,
+        text: `Average Duration (in Days) of Crimes On ${month} ${year}`,
       },
       xAxis: {
         categories: offenseAvg,

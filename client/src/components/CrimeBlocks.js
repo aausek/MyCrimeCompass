@@ -66,7 +66,7 @@ const CrimeBlocks = () => {
         height: 500
       },
       title: {
-        text: `Top 5 Blocks Per Crime Count on ${month} ${year}`,
+        text: `Top 5 Neighborhoods Blocks Per Crime Count on ${month} ${year}`,
       },
       xAxis: {
         categories: blocks,
