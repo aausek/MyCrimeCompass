@@ -9,7 +9,10 @@ Seattle criminal database visualization tool.
 ## Specifications
 SERN Stack
     
-    SQL ⋅ ExpressJS ⋅ ReactJS ⋅ NodeJS ⋅ HighchartsJS
+    SQL ⋅ ExpressJS ⋅ ReactJS ⋅ NodeJS
+
+## Charting Library
+[Highcharts](https://www.highcharts.com/docs/index)
 
 ## Data Source
 [SPD Crime Data: 2008-Present](https://data.seattle.gov/Public-Safety/SPD-Crime-Data-2008-Present/tazs-3rd5)
@@ -18,7 +21,6 @@ SERN Stack
 [Project Infracture](https://miro.com/app/board/uXjVOdYq77w=/?invite_link_id=479904700369)
 
 ## Installation Options
-
 `cd /client`\
 `npm install`\
 `npm start`
