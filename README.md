@@ -15,7 +15,7 @@ SERN Stack
 [SPD Crime Data: 2008-Present](https://data.seattle.gov/Public-Safety/SPD-Crime-Data-2008-Present/tazs-3rd5)
 
 ## Links
-[Project Infracture & Wireframes](https://miro.com/app/board/o9J_lxhSUbA=/)
+[Project Infracture](https://miro.com/app/board/uXjVOdYq77w=/?invite_link_id=479904700369)
 
 ## Installation Options
 
@@ -30,11 +30,11 @@ SERN Stack
 `Navigate to localhost:3000`
 
 ## Completed Routes & Descriptions
-Homepage - Google map visualization of recent offenses.
-Time Of Day - 1hr time frame with incidence of specific crimes.
-Average Duration - Average length in days of committed offense.
-Crime By Precinct - Top 5 precincts per offense.
-Quadrants - Number of crimes per city quadrant (NE, NW, SW, SE).
+Homepage - Google map visualization of recent offenses. <br />
+Time Of Day - 1hr time frame with incidence of specific crimes. <br />
+Average Duration - Average length in days of committed offense. <br />
+Crime By Precinct - Top 5 precincts per offense. <br />
+Quadrants - Number of crimes per city quadrant (NE, NW, SW, SE). <br />
 Crime Blocks - Neighboord blocks with highest incidence of crime.
 
 ## Complex Trend Queries
