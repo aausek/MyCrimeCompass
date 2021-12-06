@@ -94,7 +94,6 @@ async function run() {
       };
       resultAvgDur = await connection.execute(query1, binds, options);
       resultCtDur = await connection.execute(query2, binds, options);
-      // res.send(resultAvgDur.rows);
       res.json({resultAvgDur : resultAvgDur.rows, resultCtDur : resultCtDur.rows});
     });
     

@@ -38,8 +38,8 @@ const Home = () => {
         <div>
           <h1>ADD APP INTRO HERE </h1>
         </div>
-        <div class="map">
-        <GoogleMapReact
+        <div>
+        {/* <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyCJCoYjXn5NE19djxVGFJhveEaXwqNkmC0" }}
           defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}
@@ -52,7 +52,7 @@ const Home = () => {
               lng={LONGITUDE}
             />
           ))}
-        </GoogleMapReact>
+        </GoogleMapReact> */}
         </div>
         
       </div>

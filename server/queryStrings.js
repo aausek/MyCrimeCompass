@@ -2,12 +2,14 @@ module.exports = {
   // Crimes by Quadrants of longitude/latitude
   Quadrants: `SELECT
   quadrants.crime_year     "Year",
+  quadrants.crime_month     "Month", 
   quadrants.quadrant       "Quadrant",
   COUNT(quadrants.offense) "Crime Count"
 FROM
   (
       SELECT
           d.year       crime_year,
+          d.month_name crime_month,
           CASE
               WHEN c.latitude > avg_lat
                    AND c.longitude < avg_long THEN
@@ -45,6 +47,7 @@ WHERE
   quadrants.crime_year >= 2008
 GROUP BY
   quadrants.crime_year,
+  quadrants.crime_month,
   quadrants.quadrant`,
 
   // 100 blocks with the most crime by year/month

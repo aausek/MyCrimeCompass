@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import GoogleMapReact from 'google-map-react';
+import Marker from './Marker';
 import "../assets/Quadrants.css";
 
 const Quadrants = () => {
@@ -117,6 +119,13 @@ const Quadrants = () => {
       },
     };
 
+    const mapProps = {
+      center: {
+        lat: 47.6062,
+        lng: -122.335167
+      },
+      zoom: 11
+    };
     return (
       // HEATMAP - MONTHS ON Y-AXIS, TIMEOFDAY (ASC) ON X-AXIS
       // YEAR RANGE AS USER FILTER
@@ -160,13 +169,26 @@ const Quadrants = () => {
         <br />
         <br />
 
-        <div class="charts">
-          <HighchartsReact highcharts={Highcharts} options={options} />
-          <br />
-          <br />
-          <br />
-          <HighchartsReact highcharts={Highcharts} options={options2} />
+        <div >
+          <h1>ADD APP INTRO HERE </h1>
         </div>
+        <div style={{ height: '100vh', width: '100%' }}>
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: "AIzaSyCJCoYjXn5NE19djxVGFJhveEaXwqNkmC0" }}
+          defaultCenter={mapProps.center}
+          defaultZoom={mapProps.zoom}
+        >
+          {items.map(({OFFENSE_CODE, REPORT_NUMBER, LATITUDE, LONGITUDE}) => (
+            <Marker
+              key={REPORT_NUMBER}
+              text={OFFENSE_CODE}
+              lat={LATITUDE}
+              lng={LONGITUDE}
+            />
+          ))}
+        </GoogleMapReact>
+        </div>
+
       </div>
     );
   };

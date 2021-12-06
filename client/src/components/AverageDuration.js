@@ -190,7 +190,7 @@ const AverageDuration = () => {
       series: [
         {
           name: `${offenseCt}`,
-          // showInLegend: false,
+          showInLegend: false,
           data: crimeCount,
           dataLabels: {
             enabled: true,
