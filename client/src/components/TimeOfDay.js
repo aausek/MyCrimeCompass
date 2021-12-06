@@ -91,39 +91,6 @@ const TimeOfDay = () => {
       },
     };
 
-    const options2 = {
-      chart: {
-        type: "line",
-        borderRadius: 10,
-        width: 900,
-        height: 500
-      },
-      title: {
-        text: `Number of Crimes During ${month} ${year}`,
-      },
-      xAxis: {
-        categories: times,
-      },
-      yAxis: {
-        title: {
-          text: "Volume",
-        },
-      },
-      series: [
-        {
-          name: `${month} ${year}`,
-          data: numCrimes,
-        },
-      ],
-      plotOptions: {
-        line: {
-          dataLabels: {
-            enabled: true,
-          },
-        },
-      },
-    };
-
     return (
 
       // TODO: TIME RANGE FILTER
@@ -171,10 +138,6 @@ const TimeOfDay = () => {
 
         <div class="charts">
           <HighchartsReact highcharts={Highcharts} options={options} />
-          {/* <br />
-          <br />
-          <br />
-          <HighchartsReact highcharts={Highcharts} options={options2} /> */}
         </div>
       </div>
     );

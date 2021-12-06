@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Highcharts, { numberFormat } from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import FunnelD from 'highcharts/highcharts-3d';
+import Funnel from 'highcharts/modules/cylinder';
 import Spinner from "react-bootstrap/Spinner";
 import GoogleMapReact from 'google-map-react';
 import Marker from './Marker';
 import "../assets/Quadrants.css";
+
+FunnelD(Highcharts);
+Funnel(Highcharts);
 
 const Quadrants = () => {
   let [items, setItems] = useState([]);
@@ -87,8 +92,6 @@ const Quadrants = () => {
         // text={obj["Crime Count"]}
       />
     ));
-    
-
 
     // const options = {
     //   chart: {
@@ -158,6 +161,38 @@ const Quadrants = () => {
       },
     };
 
+    const options3 = {
+        chart: {
+            type: 'cylinder',
+            options3d: {
+                enabled: true,
+                alpha: 15,
+                beta: 15,
+                depth: 50,
+                viewDistance: 25
+            },
+            borderRadius: 10,
+            width: 900,
+            height: 500,
+        },
+        title: {
+          text: `Number of Crimes Per City Quadrant During ${month} ${year}`,
+        },
+        xAxis: {
+          categories: quadrant,
+        },
+        yAxis: {
+          title: {
+            text: "Count",
+          },
+        },
+        series: [{
+            data: crimeCount,
+            colorByPoint: true,
+            showInLegend: false
+        }]
+    }
+
     const mapProps = {
       center: {
         lat: 47.6062,
@@ -209,7 +244,7 @@ const Quadrants = () => {
         <br />
         <br />
 
-        {/* <div style={{ height: '100vh', width: '100%' }}>
+        <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyCJCoYjXn5NE19djxVGFJhveEaXwqNkmC0" }}
           defaultCenter={mapProps.center}
@@ -217,14 +252,14 @@ const Quadrants = () => {
             {markers}
         </GoogleMapReact>
 
-        </div> */}
+        </div>
 
         <div class="charts">
-          <HighchartsReact highcharts={Highcharts} options={options2} />
-          {/* <br />
+          {/* <HighchartsReact highcharts={Highcharts} options={options2} />*/}
           <br />
           <br />
-          <HighchartsReact highcharts={Highcharts} options={options2} /> */}
+          <br /> 
+          <HighchartsReact highcharts={Highcharts} options={options3} />
         </div>
 
       </div>

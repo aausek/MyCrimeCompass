@@ -41,12 +41,11 @@ const Home = () => {
     console.log(items);
     return (
       // ADD SEATTLE PERIMETER
-      <div class="mainDiv" style={{ margin: "60px" }}>
-
-      
+      <div class="mainDiv">
+        <br />  
         <div style={{ height: "100vh", width: "100%" }}>
-          <h1>Welcome to MyCrimeCompass - Seattle</h1>
-          <h4>A criminal offense database since 2008</h4>
+          <h1>MyCrimeCompass - Seattle</h1>
+          <h4>A criminal offense database | Offense count 2008-Nov.2021: 936470</h4>
           <div className="map">
             <GoogleMapReact
               bootstrapURLKeys={{
