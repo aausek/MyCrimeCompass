@@ -199,7 +199,7 @@ const AverageDuration = () => {
           data: crimeCount,
           dataLabels: {
             enabled: true,
-            format: "{point}",
+            format: "{point.label}",
           },
         },
       ],
